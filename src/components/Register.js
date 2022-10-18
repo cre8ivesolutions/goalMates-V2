@@ -121,6 +121,7 @@ function Register() {
               onChange={handleName}
               className="forminputs"
               value={username}
+              id="username"
               type="text"
             />
           </div>
@@ -130,6 +131,7 @@ function Register() {
               onChange={handleEmail}
               className="forminputs"
               value={email}
+              id="email"
               type="email"
             />
           </div>
@@ -140,6 +142,7 @@ function Register() {
               onChange={handlePassword}
               className="forminputs"
               value={password}
+              id="password"
               type="password"
             />
           </div>
@@ -149,6 +152,7 @@ function Register() {
               onChange={handleLocation}
               className="forminputs"
               value={user_location}
+              id="user_location"
               type="location"
               defaultValue={user_location}
             />
