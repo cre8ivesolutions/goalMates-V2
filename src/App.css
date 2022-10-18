@@ -1,10 +1,11 @@
 .App {
-  text-align: center;
+  background-image: rgba(255,255,255,255);
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  border-radius: 1em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,18 +15,18 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: rgba(255,255,255,255);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* font-size: calc(10px + 2vmin); */
+  color: rgba(33,33,33,255);
 }
 
 .App-link {
-  color: #61dafb;
+  color: rgb(4,132,148);
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +37,25 @@
     transform: rotate(360deg);
   }
 }
+
+.forminputs {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: .5em;
+}
+
+.sign-up {
+  background-color: rgba(255,17,84,255);
+  color: rgba(254,244,244,255);
+  border-radius: 1em;
+  min-width: 25vw;
+  min-height: 5vh ;
+}
+
+.left {
+  text-align: left;
+}
+
+/* colors from meetup website:  logo color: rgba(255,17,84,255) logo-text-pink: rgba(254,244,244,255) background "white" rgba(237,28,64,255) background-lightblue: rgba(234,245,246,255) text-darkgray: rgba(33,33,33,255) teal-blue: rgb(4,132,148) button-text-vlue: rgba(203,229,233,255) */
