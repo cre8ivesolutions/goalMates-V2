@@ -112,76 +112,84 @@ function Register() {
         {errorMessage()}
         {successMessage()}
       </div>
-
-      <form className="form">
-        {/* Labels and inputs for form data */}
-        <div>
-          <label className="label">Your Name</label>
-          <input
-            onChange={handleName}
-            className="forminputs"
-            value={username}
-            type="text"
-          />
-        </div>
-        <div>
-          <label className="label">Email address</label>
-          <input
-            onChange={handleEmail}
-            className="forminputs"
-            value={email}
-            type="email"
-          />
-        </div>
-        {/* username is equal to email, and password will need to be set on a different page */}
-        <div>
-          <label className="label">Password</label>
-          <input
-            onChange={handlePassword}
-            className="forminputs"
-            value={password}
-            type="password"
-          />
-        </div>
-        <div>
-          <label className="label">Location</label>
-          <input
-            onChange={handleLocation}
-            className="forminputs"
-            value={user_location}
-            type="location"
-            defaultValue={user_location}
-          />
-        </div>
-        {/* <div>
+      <div>
+        <form className="form">
+          {/* Labels and inputs for form data */}
+          <div>
+            <label className="label">Your Name</label>
+            <input
+              onChange={handleName}
+              className="forminputs"
+              value={username}
+              type="text"
+            />
+          </div>
+          <div>
+            <label className="label">Email address</label>
+            <input
+              onChange={handleEmail}
+              className="forminputs"
+              value={email}
+              type="email"
+            />
+          </div>
+          {/* username is equal to email, and password will need to be set on a different page */}
+          <div>
+            <label className="label">Password</label>
+            <input
+              onChange={handlePassword}
+              className="forminputs"
+              value={password}
+              type="password"
+            />
+          </div>
+          <div>
+            <label className="label">Location</label>
+            <input
+              onChange={handleLocation}
+              className="forminputs"
+              value={user_location}
+              type="location"
+              defaultValue={user_location}
+            />
+          </div>
+          {/* <div>
                     <label className="label">Bio</label>
                     <input onChange={handleBio} className="forminputs"
-                        value={bio} type="bio" />
-                </div> */}
-        {/* <div>
+                    value={bio} type="bio" />
+                  </div> */}
+          {/* <div>
                     <label className="label">Profile Pic</label>
                     <input onChange={handleProfile_pic} className="forminputs"
-                        value={profile_pic} type="file" />
-                </div> */}
-        <div className="left">
-          <span>
-            <label className="label">Age</label>
-            <input type="checkbox" />
-            <p>
-              <small>I am 18 years of age or older.</small>
-            </p>
-          </span>
-        </div>
-        <button onClick={handleSubmit} className="btn sign-up" type="submit">
-          Sign up
-        </button>
-      </form>
-      <p>
-        <small>
-          By signing up, you agree to <a href="/home">Terms of Service</a>, <a href="home">Privacy Policy</a>, and
-          <a href="/home"> Cookie Policy </a>
-        </small>
-      </p>
+                    value={profile_pic} type="file" />
+                  </div> */}
+          <div>
+            <span>
+              <label className="label">Age</label>
+              <input type="checkbox" />
+              <p>
+                <small>I am 18 years of age or older.</small>
+              </p>
+            </span>
+          </div>
+          <button onClick={handleSubmit} className="btn sign-up" type="submit">
+            Sign up
+          </button>
+        </form>
+      </div>
+      <div className="center">
+        <p>
+          <small>
+            By signing up, you agree to <a href="/">Terms of Service</a>,{" "}
+            <a href="/">Privacy Policy</a>, and
+            <a href="/"> Cookie Policy </a>
+          </small>
+        </p>
+
+        <p>
+          Already a member? <a href="/">Log In</a>
+        </p>
+      </div>
     </div>
   );
 }

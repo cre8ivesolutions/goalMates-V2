@@ -39,7 +39,7 @@
 }
 
 .forminputs {
-  width: 100%;
+  width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
@@ -47,15 +47,19 @@
 }
 
 .sign-up {
-  background-color: rgba(255,17,84,255);
+  background-color: rgba(246,88,88,255);
   color: rgba(254,244,244,255);
-  border-radius: 1em;
-  min-width: 25vw;
+  border-radius: .5em;
+  width: 95%;
   min-height: 5vh ;
+  outline: none;
+}
+ 
+a {
+  color: rgb(4,132,148);
+}
+.center {
+  text-align: center;
 }
 
-.left {
-  text-align: left;
-}
-
-/* colors from meetup website:  logo color: rgba(255,17,84,255) logo-text-pink: rgba(254,244,244,255) background "white" rgba(237,28,64,255) background-lightblue: rgba(234,245,246,255) text-darkgray: rgba(33,33,33,255) teal-blue: rgb(4,132,148) button-text-vlue: rgba(203,229,233,255) */
+/* colors from meetup website:  logo color: rgba(255,17,84,255) logo-text-pink: rgba(254,244,244,255) background "white" rgba(237,28,64,255) pink-button: rgba(246,88,88,255) background-lightblue: rgba(234,245,246,255) text-darkgray: rgba(33,33,33,255) teal-blue: rgb(4,132,148) button-text-blue: rgba(203,229,233,255) light-gray used for subtitles: rgb(156,156,156) */
