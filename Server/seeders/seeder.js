@@ -5,10 +5,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const userSaved = await queryInterface.bulkInsert('users', [{
-      username: 'This Name',
+      username: 'Seeder Name',
       email: 'seeder@email.com',
       password: "password",
-      user_location: "Seed location"
+      user_location: "Seed location",
+      user_id: 1
     }])
 
     // const eventSaved = await queryInterface.bulkInsert('events', [{
