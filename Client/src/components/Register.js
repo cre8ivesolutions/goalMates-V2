@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import React from "react";
-import "../App.css";
+// import "../src/App.css";
 // import Form from 'react-bootstrap/Form';
 // import { Container } from 'react';
 // import { Link } from "react-router-dom"
@@ -63,8 +63,8 @@ function Register() {
     e.preventDefault();
     if (
       username === "" ||
-      email === ""
-      // password === ''
+      email === "" ||
+      password === ''
     ) {
       setError(true);
     } else {
