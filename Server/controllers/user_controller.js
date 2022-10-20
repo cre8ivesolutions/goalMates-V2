@@ -25,7 +25,7 @@ users.get('/', async (req, res) => {
 users.get('/:username', async (req, res) => {
     try {
         const foundUser = await User.findOne({
-            where: { name: req.params.name },
+            where: { usernname: req.params.username },
             include: [ 
                 { 
                 model: User, 
@@ -85,4 +85,4 @@ users.delete('/:id', async (req, res) => {
 })
 
 // EXPORT
-module.exports = user
+module.exports = users
