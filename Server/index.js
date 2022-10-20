@@ -20,14 +20,18 @@ const sequelize = new Sequelize({
     password: 'password'
   })
 
-  app.get('/', (req, res) => {
-    res.status(200).send('Please use a different search term')
-})
+// app.get('/', (req, res) => {
+//     res.status(200).send('Please use a different search term')
+// })
 
-app.get('/:username', async (req, res) => {
+app.get('/', async (req, res) => {
     let response = await axios.get(`https://postgres:password@localhost:4000/goalMates/lookup?username=${req.params.username}`)
     res.status(200).send(response.data)
 })
+// app.get('/:username', async (req, res) => {
+//     let response = await axios.get(`https://postgres:password@localhost:4000/goalMates/lookup?username=${req.params.username}`)
+//     res.status(200).send(response.data)
+// })
 
 
 try {

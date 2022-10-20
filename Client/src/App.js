@@ -1,45 +1,75 @@
 import logo from "./public/success.jpg";
 import "./App.css";
 import Register from "./components/Register";
-import SearchBar from "./components/SearchBar";
-import React, { useEffect , useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import SearchBar from "./components/SearchBar";
+import UserGallery from "./components/UserGallery";
+
+// require('dotenv').config()
 
 function App() {
-  let [search, setSearch] = useState('')
-	let [message, setMessage] = useState('Search goalMates!')
-	let [data, setData] = useState([])
-  const PG_URI = 'postgres://postgres:password@localhost:4000/goalMates' 
 
+  let [search, setSearch] = useState("");
+  let [message, setMessage] = useState("Search goalMates!");
+  let [data, setData] = useState([]);
+
+  const PG_URI = "http:localhost:4000/goalMates/users/search?term=";
+
+  // 'https://postgres:password@localhost:4000/goalMates'
+  useEffect(() => {
+    if (search) {
+      const fetchData = async () => {
+        document.title = `${search} Search goalMates`;
+        const response = await fetch(PG_URI + search);
+        const resData = await response.json();
+        // console.log(resData.results)
+
+        if (resData.results.length > 0) {
+          return setData(resData.results);
+        } else {
+          return setMessage("Not Found");
+        }
+
+      };
+
+      fetchData();
+    }
+  }, [search]);
+
+
+  const handleSearch = (e, term) => {
+    e.preventDefault();
+    setSearch(term);
+  };
+
+
+  console.log({ data });
   
-	useEffect(() => {
-		if(search) {
-			const fetchData = async () => {
-				document.title = `${search} Search goalMates`
-				const response = await fetch(PG_URI + search)
-				const resData = await response.json()
-				if (resData.results.length > 0) {
-					return setData(resData.results)
-				} else {
-					return setMessage('Not Found')
-				}
-			}
-			fetchData()
-		}
-	}, [search])
-	
-	const handleSearch = (e, term) => {
-		e.preventDefault()
-		setSearch(term)
-	}
-	console.log({data})
+
   return (
     <div className="App">
-      <header className="App-header">
-        {message}
-        {/* <Routes/>  */}
-        <SearchBar handleSearch = {handleSearch}/>
+      <div className="App-header">
+      {message}
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div>
+                  <SearchBar handleSearch={handleSearch} />
+                  <UserGallery data={data} />
+                </div>
+              }
+            />
+            {/* <Route path="/album/:id" element={<AlbumView />} /> */}
+            {/* <Route path="/artist/:id" element={<ArtistView />} /> */}
+          </Routes>
+        </Router>
         <Register />
+
+        {/* <Routes/>  */}
         <br />
         <hr />
         <img src={logo} size="100x100" className="App-logo" alt="logo" />
@@ -51,7 +81,7 @@ function App() {
         >
           Check Out Our Model Site 'Meetup.com'
         </a>
-      </header>
+      </div>
     </div>
   );
 }

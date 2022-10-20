@@ -10,12 +10,13 @@ app.use(express.json());
 
 //Routes
 
-//create a userProfile
-app.post('/register', async(req, res) => {
+//create a userProfile"
+app.post('/', async(req, res) => {
     try {
         
-        const { description } = req.body;
-        const newProfile = await Pool.query("INSERT INTO profile (description) VALUES($1) RETURNING *",[description]
+        // const { description } = req.body;
+        const newProfile = await Pool.query(`INSERT INTO users(username, email, password, user_location, user_id) VALUES (${username}, ${email}, ${password}, ${user_location}, ${user_id}) RETURNING *`,
+        // [description]
         );
 
         res.json(newProfile);
@@ -25,10 +26,10 @@ app.post('/register', async(req, res) => {
 });
 //get all 
 
-app.get("/profile", async(req, res) => {
+app.get("/users", async(req, res) => {
     try {
-            const userProfile = await Pool.query("SELECT * FROM profile");
-            res.json(userProfile.rows);
+            const userProfile = await Pool.query("SELECT * FROM users");
+            res.json(users.rows);
         }   catch (err) {
             console.error(err.message)
         }
@@ -61,6 +62,6 @@ app.put("/profile/:id", async(req, res) => {
 
     })
 
-app.listen(4000, () => {
+app.listen(3001, () => {
     console.log('Success! listening on goalMates port');
 });
