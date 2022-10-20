@@ -154,7 +154,6 @@ function Register() {
               value={user_location}
               id="user_location"
               type="location"
-              defaultValue={user_location}
             />
           </div>
           {/* <div>
