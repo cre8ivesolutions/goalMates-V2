@@ -4,13 +4,36 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const userSaved = await queryInterface.bulkInsert('users', [{
+    const userSaved = await queryInterface.bulkInsert('users', [
+      {
       username: 'Seeder Name',
       email: 'seeder@email.com',
       password: "password",
       user_location: "Seed location",
       user_id: 1
-    }])
+    },
+      {
+      username: 'tammy',
+      email: 'tammy@email.com',
+      password: "password",
+      user_location: "tammys location",
+      user_id: 2
+    },
+      {
+      username: 'Kevin',
+      email: 'kevin@email.com',
+      password: "password",
+      user_location: "kevins location",
+      user_id: 3
+    },
+      {
+      username: 'Crystal',
+      email: 'crystal@email.com',
+      password: "password",
+      user_location: "Crystals location",
+      user_id: 4
+    }
+  ])},
 
     // const eventSaved = await queryInterface.bulkInsert('events', [{
     //   name: "Lolla",
@@ -44,10 +67,10 @@ module.exports = {
     // }])
     
 
-  },
+  // },
   
   down: async (queryInterface, Sequelize) => {
-    // note that this deletes ALL data from the bands table
+    // note that this deletes ALL data from the userss table
     await queryInterface.bulkDelete('users', null, {})
   }
 }
