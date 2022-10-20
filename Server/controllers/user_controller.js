@@ -7,7 +7,7 @@ const { Op } = require('sequelize')
 // FIND ALL USERS
 users.get('/', async (req, res) => {
     try {
-        const foundUsers = await User.findAll({
+        const foundUsers = await users.findAll({
            
             order: [ [ 'username','ASC' ] ],
             where: {
@@ -22,7 +22,7 @@ users.get('/', async (req, res) => {
 })
 
 // FIND A SPECIFIC USER
-profiles.get('/:name', async (req, res) => {
+users.get('/:username', async (req, res) => {
     try {
         const foundUser = await User.findOne({
             where: { name: req.params.name },
@@ -41,7 +41,7 @@ profiles.get('/:name', async (req, res) => {
     }
 })
 // CREATE A USER
-user.post('/', async (req, res) => {
+users.post('/', async (req, res) => {
     try {
         const newUser = await User.create(req.body)
         res.status(200).json({
@@ -53,7 +53,7 @@ user.post('/', async (req, res) => {
     }
 })
 // UPDATE A USER
-user.put('/:id', async (req, res) => {
+users.put('/:id', async (req, res) => {
     try {
         const updatedUser = await User.update(req.body, {
             where: {
@@ -61,7 +61,7 @@ user.put('/:id', async (req, res) => {
             }
         })
         res.status(200).json({
-            message: `Successfully updated ${updatedUser} User(s)`
+            message: `Successfully updated ${updatedUser} User`
         })
     } catch(err) {
         res.status(500).json(err)
@@ -69,7 +69,7 @@ user.put('/:id', async (req, res) => {
 })
 
 // DELETE A USER
-user.delete('/:id', async (req, res) => {
+users.delete('/:id', async (req, res) => {
     try {
         const deletedUsers = await User.destroy({
             where: {
@@ -77,7 +77,7 @@ user.delete('/:id', async (req, res) => {
             }
         })
         res.status(200).json({
-            message: `Successfully deleted ${deletedUsers} user(s)`
+            message: `Successfully deleted ${deletedUsers} user`
         })
     } catch(err) {
         res.status(500).json(err)

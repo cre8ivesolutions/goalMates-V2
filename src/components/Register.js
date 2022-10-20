@@ -170,9 +170,9 @@ function Register() {
           <div>
             <span>
               <label className="label">Age</label>
-              <input type="checkbox" />
               <p>
-                <small>I am 18 years of age or older.</small>
+              <input type="checkbox" />
+                <small> I am 18 years of age or older.</small>
               </p>
             </span>
           </div>
