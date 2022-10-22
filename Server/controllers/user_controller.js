@@ -1,8 +1,27 @@
 // DEPENDENCIES
-const user = require('express').Router()
+const users = require('express').Router()
 const db = require('../models')
 const { User } = db 
 const { Op } = require('sequelize')
+
+// CREATE A USER
+users.post('/user', async (req, res) => {
+    try {
+        const { username, email, password, user_location } = req.body;
+        const newUser = await User.create(req.body)(
+            "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *", 
+            [username, email, password, user_location]
+        )
+        res.json(newUser);
+        res.status(200).json({
+            message: 'Successfully inserted a new user',
+            data: newUser,
+        })
+        console.log("user_controller post log" + req.body)
+    } catch(err) {
+        res.status(500).json(err)
+    }
+})
 
 // FIND ALL USERS
 users.get('/', async (req, res) => {
@@ -38,18 +57,6 @@ users.get('/:username', async (req, res) => {
         res.status(200).json(foundUser)
     } catch (error) {
         res.status(500).json(error)
-    }
-})
-// CREATE A USER
-users.post('/', async (req, res) => {
-    try {
-        const newUser = await User.create(req.body)
-        res.status(200).json({
-            message: 'Successfully inserted a new user',
-            data: newUser
-        })
-    } catch(err) {
-        res.status(500).json(err)
     }
 })
 // UPDATE A USER

@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const Pool = require('../Server/db');
+const { User } = db 
+
+const { Op } = require('sequelize')
+
 const { application } = require('express');
 
 //middleware
@@ -14,12 +18,13 @@ app.use(express.json());
 app.post('/', async(req, res) => {
     try {
         
-        // const { description } = req.body;
-        const newProfile = await Pool.query(`INSERT INTO users(username, email, password, user_location, user_id) VALUES (${username}, ${email}, ${password}, ${user_location}, ${user_id}) RETURNING *`,
-        // [description]
+        const { description } = req.body;
+        const newProfile = await Pool.query(`INSERT INTO users(username, email, password, user_location, user_id) VALUES (${username}, ${email}, ${password}, ${user_location}) RETURNING *`,
+        [description]
         );
 
         res.json(newProfile);
+        console.log(res.json)
     } catch (err) {
         console.error(err.message);
     }

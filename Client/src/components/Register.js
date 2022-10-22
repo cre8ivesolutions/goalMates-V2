@@ -120,7 +120,7 @@ function Register() {
             <input
               onChange={handleName}
               className="forminputs"
-              value={username}
+              // id={username}
               id="username"
               type="text"
             />
@@ -130,18 +130,18 @@ function Register() {
             <input
               onChange={handleEmail}
               className="forminputs"
-              value={email}
+              // id={email}
               id="email"
               type="email"
             />
           </div>
-          {/* username is equal to email, and password will need to be set on a different page */}
+   
           <div>
             <label className="label">Password</label>
             <input
               onChange={handlePassword}
               className="forminputs"
-              value={password}
+              // id={password}
               id="password"
               type="password"
             />
@@ -151,9 +151,9 @@ function Register() {
             <input
               onChange={handleLocation}
               className="forminputs"
-              value={user_location}
+              // id={user_location}
               id="user_location"
-              type="location"
+              type="user_location"
             />
           </div>
           {/* <div>
@@ -193,6 +193,7 @@ function Register() {
           Already a member? <a href="/">Log In</a>
         </p>
       </div>
+      {/* console.log(${user_location}) */}
     </div>
   );
 }

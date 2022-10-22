@@ -1,10 +1,10 @@
-import logo from "./public/success.jpg";
+import React, { useEffect, useState } from "react";
+import SearchBar from "./components/SearchBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Register from "./components/Register";
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import SearchBar from "./components/SearchBar";
+import logo from "./public/success.jpg";
 import UserGallery from "./components/UserGallery";
 
 // require('dotenv').config()
@@ -15,7 +15,9 @@ function App() {
   let [message, setMessage] = useState("Search goalMates!");
   let [data, setData] = useState([]);
 
-  const PG_URI = "http:localhost:4000/goalMates/users/search?term=";
+  const PG_URI = 'postgres://postgres:password@localhost:4000/goalMates'
+  
+  // "http:localhost:4000/goalMates/users/search?term=";
 
   // 'https://postgres:password@localhost:4000/goalMates'
   useEffect(() => {
@@ -24,7 +26,7 @@ function App() {
         document.title = `${search} Search goalMates`;
         const response = await fetch(PG_URI + search);
         const resData = await response.json();
-        // console.log(resData.results)
+        console.log(resData.results)
 
         if (resData.results.length > 0) {
           return setData(resData.results);
@@ -60,6 +62,7 @@ function App() {
                 <div>
                   <SearchBar handleSearch={handleSearch} />
                   <UserGallery data={data} />
+                  <Register/>
                 </div>
               }
             />
@@ -67,7 +70,7 @@ function App() {
             {/* <Route path="/artist/:id" element={<ArtistView />} /> */}
           </Routes>
         </Router>
-        <Register />
+        {/* <Register /> */}
 
         {/* <Routes/>  */}
         <br />
