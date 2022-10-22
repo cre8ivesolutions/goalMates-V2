@@ -1,19 +1,18 @@
 const express = require("express");
-const app = express();
-const { Sequelize } = require("sequelize");
-const users = require ("./controllers/user_controller")
-
+const app = express()
+const cors = require ('cors')
+const pool = require("./db")
+// const { Sequelize } = require("sequelize");
 // const axios = require('axios')
-// const cors = require ('cors')
-// const PORT = process.env.PORT;
-// const PG_URI = process.env.PG_URI;
 
 //Configureation / Middleware
 require("dotenv").config();
+const users = require ("./controllers/user_controller")
+app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+// app.use(express.urlencoded({ extended: false }))
 
-// app.use(cors())
+const usersController = require ("./controllers/user_controller")
 
 // ROOT
 app.get('/', (req, res) => {
@@ -22,20 +21,7 @@ app.get('/', (req, res) => {
     })
 })
 
-// SEQUELIZE CONNECTION
-// const sequelize = new Sequelize({
-//     storage: process.env.PG_URI,
-//     dialect: 'postgres',
-//     username: 'postgres',
-//     password: 'password'
-// })
-
-const usersController = require ("./controllers/user_controller")
-app.use("/users", usersController)
-
-//     res.status(200).send('Please use a different search term')
-// })
-
+app.use("/register",  usersController)
 
 // app.get('/', async (req, res) => {
 //     let response = await axios.get(`https://postgres:password@localhost:4000/goalMates/lookup?username=${req.params.username}`)

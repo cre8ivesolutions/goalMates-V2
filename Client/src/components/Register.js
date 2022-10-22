@@ -143,7 +143,7 @@ function Register() {
               className="forminputs"
               // id={password}
               id="password"
-              type="password"
+              type="text"
             />
           </div>
           <div>
@@ -153,7 +153,7 @@ function Register() {
               className="forminputs"
               // id={user_location}
               id="user_location"
-              type="user_location"
+              type="text"
             />
           </div>
           {/* <div>

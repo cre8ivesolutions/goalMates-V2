@@ -6,28 +6,28 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const userSaved = await queryInterface.bulkInsert('users', [
       {
-      user_id: 1,
+      // user_id: 1,
       username: 'Seeder Name',
       email: 'seeder@email.com',
       password: "password",
       user_location: "Seed location"
     },
       {
-      user_id: 2,
+      // user_id: 2,
       username: 'tammy',
       email: 'tammy@email.com',
       password: "password",
       user_location: "tammys location"
     },
       {
-      user_id: 3,
+      // user_id: 3,
       username: 'Kevin',
       email: 'kevin@email.com',
       password: "password",
       user_location: "kevins location"
     },
       {
-      user_id: 4,
+      // user_id: 4,
       username: 'Crystal',
       email: 'crystal@email.com',
       password: "password",

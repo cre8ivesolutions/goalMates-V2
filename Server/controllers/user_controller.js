@@ -5,14 +5,14 @@ const { User } = db
 const { Op } = require('sequelize')
 
 // CREATE A USER
-users.post('/user', async (req, res) => {
+users.post('/register', async (req, res) => {
     try {
         const { username, email, password, user_location } = req.body;
-        const newUser = await User.create(req.body)(
+        const newUser = await User.query(
             "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *", 
-            [username, email, password, user_location]
+            [{username}, {email}, {password}, {user_location}]
         )
-        res.json(newUser);
+        // res.json(newUser);
         res.status(200).json({
             message: 'Successfully inserted a new user',
             data: newUser,
