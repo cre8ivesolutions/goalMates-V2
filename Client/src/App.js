@@ -87,6 +87,7 @@ function App() {
         >
           Check Out Our Model Site 'Meetup.com'
         </a>
+        <p>Click on 'Sign up' then go to 'sign up with email'</p>
       </div>
     </div>
   );

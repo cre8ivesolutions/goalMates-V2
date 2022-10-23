@@ -4,7 +4,7 @@ function SearchBar(props) {
     let [searchTerm, setSearchTerm] = useState('')
 
     return (
-        <div>
+        <div display="inline-block">
             
         <form onSubmit={(e) => props.handleSearch(e, searchTerm)}>
 
