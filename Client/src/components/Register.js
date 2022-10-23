@@ -6,6 +6,7 @@ import React from "react";
 // import Form from 'react-bootstrap/Form';
 // import { Container } from 'react';
 // import { Link } from "react-router-dom"
+// const PG_URI = process.env.PG_URI
 
 function Register() {
   // States for registration
@@ -21,6 +22,7 @@ function Register() {
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+  // const error =false;
 
   // Handling the username change
   const handleName = (e) => {
@@ -72,6 +74,28 @@ function Register() {
       setError(false);
     }
   };
+  
+  //SUBMIT FORM Tammy added on 10/22
+  const onSubmit = async e => {
+    e.preventDefault();
+    try {
+      // const localHost=process.env.PG_URI;
+      const body = {username, email, password, user_location};
+      const response = await fetch("http://localhost:5432/goalMates"
+      , {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(body)
+        //     setSubmitted(true);
+        });
+
+        console.log(response)
+
+      } catch (error) {
+        console.error(errorMessage)
+      }
+
+  }
 
   // Showing success message
   const successMessage = () => {
@@ -113,15 +137,15 @@ function Register() {
         {successMessage()}
       </div>
       <div>
-        <form className="form">
+        <form className="form" onSubmit={onSubmit}>
           {/* Labels and inputs for form data */}
           <div>
             <label className="label">Your Name</label>
             <input
               onChange={handleName}
               className="forminputs"
-              // id={username}
               id="username"
+              value={username} required
               type="text"
             />
           </div>
@@ -130,7 +154,7 @@ function Register() {
             <input
               onChange={handleEmail}
               className="forminputs"
-              // id={email}
+              value={email} required
               id="email"
               type="email"
             />
@@ -141,7 +165,7 @@ function Register() {
             <input
               onChange={handlePassword}
               className="forminputs"
-              // id={password}
+              value={password} required
               id="password"
               type="text"
             />
@@ -151,7 +175,7 @@ function Register() {
             <input
               onChange={handleLocation}
               className="forminputs"
-              // id={user_location}
+              value={user_location}
               id="user_location"
               type="text"
             />
@@ -175,7 +199,9 @@ function Register() {
               </p>
             </span>
           </div>
-          <button onClick={handleSubmit} className="btn sign-up" type="submit">
+          <button 
+          onClick={handleSubmit}
+           className="btn sign-up" type="submit">
             Sign up
           </button>
         </form>
@@ -193,9 +219,9 @@ function Register() {
           Already a member? <a href="/">Log In</a>
         </p>
       </div>
-      {/* console.log(${user_location}) */}
     </div>
   );
+  // {console.log({username})}
 }
 
 export default Register;

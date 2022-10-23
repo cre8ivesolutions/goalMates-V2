@@ -7,24 +7,23 @@ import Register from "./components/Register";
 import logo from "./public/success.jpg";
 import UserGallery from "./components/UserGallery";
 
+
 // require('dotenv').config()
 
 function App() {
-
+  
   let [search, setSearch] = useState("");
   let [message, setMessage] = useState("Search goalMates!");
   let [data, setData] = useState([]);
-
-  const PG_URI = 'postgres://postgres:password@localhost:4000/goalMates'
   
-  // "http:localhost:4000/goalMates/users/search?term=";
-
-  // 'https://postgres:password@localhost:4000/goalMates'
+  // const PG_URI = process.env.PG_URI;
+  
   useEffect(() => {
+    const PG_URI = process.env.PG_URI;
     if (search) {
       const fetchData = async () => {
         document.title = `${search} Search goalMates`;
-        const response = await fetch(PG_URI + search);
+        const response = await fetch(PG_URI + '/search?term=' + search);
         const resData = await response.json();
         console.log(resData.results)
 
@@ -56,16 +55,20 @@ function App() {
       {message}
         <Router>
           <Routes>
-            <Route
-              path="/"
-              element={
+            <Route path="/" element={ 
                 <div>
                   <SearchBar handleSearch={handleSearch} />
                   <UserGallery data={data} />
-                  <Register/>
+                  {/* <Register/> */}
                 </div>
               }
             />
+            <Route path="/register" element={
+              <div>
+                <SearchBar handleSearch={handleSearch}/>
+                <Register />
+              </div>
+            }></Route>
             {/* <Route path="/album/:id" element={<AlbumView />} /> */}
             {/* <Route path="/artist/:id" element={<ArtistView />} /> */}
           </Routes>

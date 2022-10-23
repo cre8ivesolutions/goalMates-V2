@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
+
 const cors = require('cors');
 const Pool = require('../Server/db');
+
+
 const { User } = db 
 
 const { Op } = require('sequelize')
 
 const { application } = require('express');
+
+PORT = process.env.PORT;
 
 //middleware
 app.use(cors());
@@ -67,6 +72,6 @@ app.put("/profile/:id", async(req, res) => {
 
     })
 
-app.listen(3001, () => {
-    console.log('Success! listening on goalMates port');
+app.listen(process.env.PORT, () => {
+    console.log('Success! listening on goalMates port' + {PORT});
 });

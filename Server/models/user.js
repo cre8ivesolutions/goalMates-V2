@@ -6,11 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {}
 
   User.init({
-      user_id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
         username: {
           type: DataTypes.STRING,
           allowNull: false

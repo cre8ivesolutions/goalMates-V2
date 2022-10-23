@@ -12,7 +12,7 @@ users.post('/register', async (req, res) => {
             "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *", 
             [{username}, {email}, {password}, {user_location}]
         )
-        // res.json(newUser);
+        res.json(newUser);
         res.status(200).json({
             message: 'Successfully inserted a new user',
             data: newUser,
