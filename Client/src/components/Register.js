@@ -140,16 +140,20 @@ function Register() {
         <form className="form" onSubmit={onSubmit}>
           {/* Labels and inputs for form data */}
           <div>
-            <label className="label">Your Name</label>
+            {/* change this variable to Name */}
+            <label className="label">Your name</label>
             <input
               onChange={handleName}
               className="forminputs"
               id="username"
               value={username} required
+              autoComplete="name"
               type="text"
             />
           </div>
-          <div>
+          <div id="email-error" className="text-alertRed mt-1 ds-dont-tiny">
+            {/* <span class="sr=only">"Error:"
+            "&nbsp;"==0</span> */}
             <label className="label">Email address</label>
             <input
               onChange={handleEmail}
@@ -157,6 +161,8 @@ function Register() {
               value={email} required
               id="email"
               type="email"
+              placeholder="Example@email.com"
+              autoComplete="email"
             />
           </div>
    
@@ -166,10 +172,13 @@ function Register() {
               onChange={handlePassword}
               className="forminputs"
               value={password} required
-              id="password"
-              type="text"
+              id="new-password"
+              type="password"
+              autoComplete="new-password"
             />
+            {/* <button type="button" class="absolute w-5 h-6" title="Show password" aria-label="Show password button" data-element-name="show-or-hide-password-btn" ></button> */}
           </div>
+
           <div>
             <label className="label">Location</label>
             <input
@@ -178,6 +187,8 @@ function Register() {
               value={user_location}
               id="user_location"
               type="text"
+              autoComplete="off"
+              placeholder="Neighborhood or City or zip code"
             />
           </div>
           {/* <div>

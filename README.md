@@ -1,6 +1,29 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### What to do
+1. cd into Server and run npm
+2. cd into Client and run npm i
+3. Create a .env file in each of the Client and Server files. Update your ports in both the client and server: create a Server PORT=500 and add your PG_URI=... In the Client create PORT=3000 and add your PG_URI=...
+4. In the Server, create db.js and add your password to the information below and copy the info into the file. 
+
+const Pool = require('pg').Pool;
+
+
+const pool = new Pool({
+    user: 'postgres',
+    password: 'yourpassword',
+    host: 'localhost',
+    port: 5432,
+    database: 'goalMates'
+});
+
+module.exports = pool;
+
+5.  open SQL Shell and follow instructions at the bottom of database.sql file to create your database, tables, and columns
+6. in Server, run nodemon index
+7. in Client, run npm start
+8. in Postman app, text the route http://localhost:5000  Make sure the datatype is set to JSON and then under Body - raw make you should see the message: Welcome to the goalMates API
 
 ## Available Scripts
 
