@@ -28,17 +28,23 @@ app.post("/register", async (req, res) => {
     
     try {
         // const tests = JSON.stringify(req.body);
+
         // const { tests } = req.body
         // console.log(tests)
-        // const [ {username}, {email}, {password}, {user_location} ] = userData
-        // userData = req.body;
+
+        const [ {username}, {email}, {password}, {user_location} ] = req.body
+        console.log(username, email, password, user_location )
+
         // console.log(username, email, password, user_location)
+
+
 // the two lines below are WORKING
-        const userData = JSON.stringify(req.body)
-        console.log(userData)
+        // const userData = JSON.stringify(req.body)
+        // console.log(userData)
         
         // const newUser = await pool.query(
-        //     "INSERT INTO users (userData) VALUES($1) RETURNING *",
+        //     "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *",
+            // [{username}, {email}, {password}, {user_location}]
         //     )
         //     res.json(newUser);
         //     res.status(200).json({
