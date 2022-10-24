@@ -2,7 +2,7 @@ const express = require("express");
 const app = express()
 const cors = require ('cors')
 const pool = require("./db")
-// const { Sequelize } = require("sequelize");
+const { Sequelize } = require("sequelize");
 // const axios = require('axios')
 require("dotenv").config();
 
