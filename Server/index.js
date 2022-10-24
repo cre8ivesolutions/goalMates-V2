@@ -8,7 +8,7 @@ require("dotenv").config();
 
 //CONFIGURATION-MIDDLEWARE
 app.use(cors())
-app.use(express.json())
+app.use(express.json()) //this is req.body
 // app.use(express.urlencoded({ extended: false }))
 
 // const users = require ("./controllers/user_controller")
@@ -24,19 +24,31 @@ app.get('/', (req, res) => {
 
 // CREATE A NEW USER
 // app.use("/register",  usersController)
-users.post('/register', async (req, res) => {
+app.post("/register", async (req, res) => {
+    
     try {
-        const { username, email, password, user_location } = req.body;
-        const newUser = await User.query(
-            "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *", 
-            [{username}, {email}, {password}, {user_location}]
-        )
-        res.json(newUser);
-        res.status(200).json({
-            message: 'Successfully inserted a new user',
-            data: newUser,
-        })
-        console.log("user_controller post log" + req.body)
+        // const tests = JSON.stringify(req.body);
+        // const { tests } = req.body
+        // console.log(tests)
+        // const [ {username}, {email}, {password}, {user_location} ] = userData
+        // userData = req.body;
+        // console.log(username, email, password, user_location)
+// the two lines below are WORKING
+        const userData = JSON.stringify(req.body)
+        console.log(userData)
+        
+        // const newUser = await pool.query(
+        //     "INSERT INTO users (userData) VALUES($1) RETURNING *",
+        //     )
+        //     res.json(newUser);
+        //     res.status(200).json({
+        //         message: 'Successfully inserted a new user',
+        //         data: newUser
+        //     }
+        //     )
+        //     console.log(newUser)
+        //     console.log(userData);
+        // console.log("user_controller post log" + req.body)
     } catch(err) {
         res.status(500).json(err)
     }
