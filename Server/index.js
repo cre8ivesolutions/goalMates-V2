@@ -1,7 +1,12 @@
+const users = require('express').Router()
 const express = require("express");
 const app = express()
 const cors = require ('cors')
 const pool = require("./db")
+const db = require('./models')
+const { User } = db
+const { Op } = require('sequelize')
+
 // const { Sequelize } = require("sequelize");
 // const axios = require('axios')
 require("dotenv").config();
@@ -9,6 +14,7 @@ require("dotenv").config();
 //CONFIGURATION-MIDDLEWARE
 app.use(cors())
 app.use(express.json()) //this is req.body
+
 // app.use(express.urlencoded({ extended: false }))
 
 // const users = require ("./controllers/user_controller")
@@ -21,6 +27,33 @@ app.get('/', (req, res) => {
         message: 'Welcome to the goalMates API'
     })
 })
+//SEARCH FOR USERS
+app.get('/users/:username', async (req, res) => {
+    let response = await pool.query(`http://localhost:5000/goalMates/users/${req.params.username}`)
+    res.status(200).send(response.data)
+})
+
+
+// GET ALL USERS 
+//not working 10/23
+users.get('/users', async (req, res)=>{
+    try {
+        const foundUsers = await pool.query(
+            // `SELECT * FROM users RETURNING *`
+            {
+            order: [ [ 'username', 'ASC' ] ],
+            where: {
+                username: { [Op.like]: `%${req.query.username ? req.query.username : ''}%` }
+            }
+        }
+        )
+        res.send(foundUsers)
+        res.status(200).json(foundusers)
+        console.log(res.body)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 // CREATE A NEW USER
 // app.use("/register",  usersController)
@@ -28,32 +61,36 @@ app.post("/register", async (req, res) => {
     
     try {
         // const tests = JSON.stringify(req.body);
-
         // const { tests } = req.body
         // console.log(tests)
-
-        const [ {username}, {email}, {password}, {user_location} ] = req.body
-        console.log(username, email, password, user_location )
-
-        // console.log(username, email, password, user_location)
-
+        // console.log(JSON.stringify(req.body))
+        // console.log(res.body[0])
+        req.body = {username} 
+        console.log(username)
+        // const { email } = email
+        // const { password } = password
+        // const { user_location } = = location
+        // const [ {username}, {email}, {password}, {user_location} ] = req.body
+        // console.log(username, email, password, user_location )
 
 // the two lines below are WORKING
         // const userData = JSON.stringify(req.body)
         // console.log(userData)
-        
-        // const newUser = await pool.query(
-        //     "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *",
+
+        const newUser = await pool.query(
+            `INSERT INTO users (username, email, password, user_location) 
+            VALUES ('${username}', '${email}', '${password}','${user_location}');`
+
+        // "INSERT INTO users (username, email, password, user_location) VALUES($1, $2, $3, $4) RETURNING *",
             // [{username}, {email}, {password}, {user_location}]
-        //     )
-        //     res.json(newUser);
-        //     res.status(200).json({
-        //         message: 'Successfully inserted a new user',
-        //         data: newUser
-        //     }
-        //     )
-        //     console.log(newUser)
-        //     console.log(userData);
+            )
+            res.json(newUser);
+            res.status(200).json({
+                message: 'Successfully inserted a new user',
+                data: newUser
+            }
+            )
+            console.log(newUser)
         // console.log("user_controller post log" + req.body)
     } catch(err) {
         res.status(500).json(err)

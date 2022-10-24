@@ -11,6 +11,8 @@ CREATE TABLE users(
 
 
 
+
+
 -- search your computer for sql shell or psql
 -- for server, database, port and username each field can be left blank. For the password field, type your password - it wont appear to be typing but it is! Click enter.
 -- // in your PSQL shell terminal, use command < < psql -U pstgres > and then enter your password

@@ -19,16 +19,17 @@ function App() {
   // const PG_URI = process.env.PG_URI;
   
   useEffect(() => {
-    const PG_URI = process.env.PG_URI;
+    // const PG_URI = process.env.PG_URI;
     if (search) {
       const fetchData = async () => {
         document.title = `${search} Search goalMates`;
-        const response = await fetch(PG_URI + '/search?term=' + search);
+        const response = await fetch("http://localhost:5000/goalMates/users/" + search);
         const resData = await response.json();
         console.log(resData.results)
 
         if (resData.results.length > 0) {
           return setData(resData.results);
+          // console.log("resData " + JSON.stringify({resData}) );
         } else {
           return setMessage("Not Found");
         }
@@ -46,7 +47,7 @@ function App() {
   };
 
 
-  console.log({ data });
+  console.log(JSON.stringify({data}) );
   
 
   return (
