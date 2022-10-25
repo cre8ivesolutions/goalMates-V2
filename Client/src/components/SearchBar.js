@@ -1,14 +1,39 @@
-import { useState } from 'react'
+import { useState, useEffect } from "react"
+import { useParams } from "react-router"
+
 
 function SearchBar(props) {
     let [searchTerm, setSearchTerm] = useState('')
+    
+    const username = useParams()
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://localhost:5000/users/${username}`)
+			const resData = await response.json()
+			setSearchTerm(resData)
+		}
+		fetchData()
+	}, [ username ])
+    
+    async function handleSubmit(e){
+        e.preventDefault()
+        await fetch(`http:..localhost:5000/users/${searchTerm.username}`, {
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(username) 
+            })
+        }
 
     return (
         <div display="inline-block">
             
-        <form onSubmit={(e) => props.handleSearch(e, searchTerm)}>
+        {/* <form onSubmit={(e) => props.handleSearch(e, searchTerm)}> */}
+        <form onSubmit={handleSubmit}>
 
-            <input type="text" placeholder="Enter a search term here" onChange={
+            <input type="text" placeholder="Search for a user here" onChange={
                 (e) => setSearchTerm(e.target.value)
             } />
 

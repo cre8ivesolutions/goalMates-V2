@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import React from "react";
+// import users from "../../../Server/controllers/user_controller";
 // import "../src/App.css";
 // import Form from 'react-bootstrap/Form';
 // import { Container } from 'react';
@@ -14,6 +15,11 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user_location, setLocation] = useState("");
+  // const [credentials, setCredentials] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+
   // const [bio, setBio] = useState('');
   //bio is not on original site
   // const [profile_pic, setProfile_pic] = useState('');
@@ -35,6 +41,12 @@ function Register() {
     setEmail(e.target.value);
     setSubmitted(false);
   };
+
+  // Handling the credential change
+  // const handleCredentials = (e) => {
+  //   setCredentials(e.target.value);
+  //   setSubmitted(false);
+  // };
 
   // Handling the password change
   const handlePassword = (e) => {
@@ -59,14 +71,18 @@ function Register() {
   //     setProfile_pic(e.target.value);
   //     setSubmitted(false);
   // };
+// const [user, setUser] = useState({
+//   username:'',
+//   email:'',
+//   password:'',
+//   user_location:'',
+// })
 
   // Handling the form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      username === "" ||
-      email === "" ||
-      password === ''
+    if (username === "" || email === "" || 
+    password === "" 
     ) {
       setError(true);
     } else {
@@ -74,28 +90,25 @@ function Register() {
       setError(false);
     }
   };
-  
+
   //SUBMIT FORM Tammy added on 10/22
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
       // const localHost=process.env.PG_URI;
-      const body = {username, email, password, user_location};
-      const response = await fetch("http://localhost:5432/goalMates"
-      , {
-        method: "POST", 
-        headers: {"Content-Type": "application/json"},
+      const body = { username, email, password, user_location } ;
+      const response = await fetch(`http://localhost:5000/users/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
-        //     setSubmitted(true);
-        });
+        // setSubmitted(true);
+      }      );
 
-        console.log(response)
-
-      } catch (error) {
-        console.error(errorMessage)
-      }
-
-  }
+      console.log("response = " + response + ", strigified body =" + JSON.stringify(body));
+    } catch (error) {
+      console.error(errorMessage);
+    }
+  };
 
   // Showing success message
   const successMessage = () => {
@@ -146,7 +159,8 @@ function Register() {
               onChange={handleName}
               className="forminputs"
               id="username"
-              value={username} required
+              value={username}
+              required
               autoComplete="name"
               type="text"
             />
@@ -159,20 +173,29 @@ function Register() {
               onChange={handleEmail}
               className="forminputs"
               value={email} required
+              // onChange={(e) =>
+              //   setCredentials({ ...credentials, email: e.target.value })
+              // }
               id="email"
+              name="email"
               type="email"
               placeholder="Example@email.com"
               autoComplete="email"
             />
           </div>
-   
+
           <div>
             <label className="label">Password</label>
             <input
               onChange={handlePassword}
               className="forminputs"
               value={password} required
+              // onChange={(e) =>
+              //   setCredentials({ ...credentials, password: e.target.value
+              //   })
+              // }
               id="new-password"
+              name="password"
               type="password"
               autoComplete="new-password"
             />
@@ -205,14 +228,12 @@ function Register() {
             <span>
               <label className="label">Age</label>
               <p>
-              <input type="checkbox" />
+                <input type="checkbox" />
                 <small> I am 18 years of age or older.</small>
               </p>
             </span>
           </div>
-          <button 
-          onClick={handleSubmit}
-           className="btn sign-up" type="submit">
+          <button onClick={handleSubmit} className="btn sign-up" type="submit">
             Sign up
           </button>
         </form>
