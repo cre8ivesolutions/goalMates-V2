@@ -17,7 +17,7 @@ app.use(express.json()) //this is req.body
 
 // app.use(express.urlencoded({ extended: false }))
 
-// const users = require ("./controllers/user_controller")
+
 const usersController = require ("./controllers/user_controller")
 
 // ROOT
@@ -27,6 +27,9 @@ app.get('/', (req, res) => {
         message: 'Welcome to the goalMates API'
     })
 })
+
+app.use('/users', require('./controllers/user_controller'))
+
 //SEARCH FOR USERS
 app.get('/users/:username', async (req, res) => {
     let response = await pool.query(`http://localhost:5000/goalMates/users/${req.params.username}`)
